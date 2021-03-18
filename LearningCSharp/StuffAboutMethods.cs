@@ -25,15 +25,69 @@ namespace LearningCSharp
             MessWithIt(dinner);
             Assert.Equal("McDonalds", dinner.MainCourse);
         }
-
-        public void MessWithIt(Dinner x)
+        [Fact]
+        public void PassingByRef()
         {
-            x.MainCourse = "McDonalds";
+            int y = 12;
+            MessWithItRef(ref y);
+            Assert.Equal(24, y);
+        }
+        [Fact]
+        public void CanSwapStuff()
+        {
+            int a = 10, b = 20;
+
+            Swap<int>(ref a, ref b);
+
+            Assert.Equal(20, a);
+            Assert.Equal(10, b);
+
+            var bestFriend = "Sean";
+            var otherFriend = "Billy";
+
+            Swap<string>(ref bestFriend, ref otherFriend);
+
+            Assert.Equal("Billy", bestFriend);
+        }
+        [Fact]
+        public void UsingOutParams()
+        {
+            // int x;
+            Assert.Equal("Solo, Han", FormatName("Han", "Solo", out int x));
+            Assert.Equal(9, x);
+        }
+
+
+
+
+        public string FormatName(string first, string last, out int length)
+        {
+            var fullName = $"{last}, {first}";
+            length = fullName.Length;
+            return fullName;
+        }
+        public void Swap<T>(ref T x, ref T y)
+        {
+            T temp = x;
+            x = y;
+            y = temp;
+        }
+
+
+
+        public void MessWithItRef(ref int x)
+        {
+            x = x * 2;
         }
 
         public void MessWithIt(int x)
         {
             x = x * 2;
+        }
+
+        public void MessWithIt(Dinner x)
+        {
+            x.MainCourse = "McDonalds";
         }
     }
 }
