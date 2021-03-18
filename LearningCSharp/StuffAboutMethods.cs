@@ -57,7 +57,17 @@ namespace LearningCSharp
             Assert.Equal(9, x);
         }
 
+        [Fact]
+        public void NullableTypes()
+        {
+            //Is a struct
+            //DateTime birthday = null;
+            Nullable<DateTime> birthday = null;
+            DateTime? birthday2 = null;
 
+            //Is an object
+            string myName = null;
+        }
 
 
         public string FormatName(string first, string last, out int length)
